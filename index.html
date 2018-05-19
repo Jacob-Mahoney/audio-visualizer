@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+	
+	<title>audio visualizer</title>
+    
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.3/jquery.min.js"></script>
+    
+    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+    
+	<script src="main.js?version=1"></script>
+    
+	<link rel="stylesheet" href="style.css?version=7">
+    
+	<link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700' rel='stylesheet" type="text/css">
+	
+    <link rel="icon" type="image/ico" href="images/favicon.ico?version=2"/>
+    
+</head>
+
+<body onload="start()" onresize="resize()" onkeydown="keyboard(event)">
+    
+    <div id="dz" class="dropzoneDefault" ondrop="drop(event)">
+        <div id="dz-inner">
+            Drop audio file(s) here to <strong>visualize</strong>
+        </div>
+    </div>
+    
+    <input type="file" id="fileUploadInput" onchange="uploadFiles(this.files)" multiple>
+    
+    <div id="volumeBox">
+        <div id="volumeBoxLeft">Volume:</div>
+        <div id="volumeBoxRight"></div>
+    </div>
+    
+    <div id="help" onclick="helpClick()" onmouseover="helpHoverOver()" onmouseout="helpHoverOut()">help</div>
+    
+    <div id="questionBox">
+        <div id="questionBoxPrompt">Would you like to add the uploaded songs to your current set of songs, or start fresh?</div>
+        <div class="questionBoxChoice" onclick="question(this)">Add</div>
+        <div class="questionBoxChoice" onclick="question(this)">Start fresh</div>
+        <div class="questionBoxChoice" onclick="question(this)">Cancel</div>
+    </div>
+    
+    <div id="wrapper">
+        
+        <div id="title">
+            
+            <div id="header">audio <strong>visualizer</strong></div>
+            <br>
+            <div id="sub-header">drag and drop a <strong>mp3, mp4, or wav file</strong> to get started or</div>
+            <br>
+            <label id="fileUploadBox" for="fileUploadInput">
+                <div>choose file(s)</div>
+            </label>
+            
+        </div>
+        
+        <audio id="myAudio"></audio>
+        
+        <div id="leftSong" onclick="changeSong(this)">
+            <img src="images/left2.png" width="15" height="20">
+        </div>
+        
+        <div id="songStuff">
+            
+            <canvas width="1280" height="720" id="canvasBars"></canvas>
+            
+            <div id="timeBar" onmousedown="mouseDown(event)">
+                <div id="time">hey there</div>
+                <div id="statusBar"></div>
+            </div>
+            
+            <div id="songInfo">
+                <div id="nowPlaying">now playing:</div>
+                <div id="songTitle">hey</div>
+                <div id="songIndex">hola</div>
+            </div>
+            
+        </div>
+        
+        <div id="rightSong" onclick="changeSong(this)">
+            <img src="images/right2.png" width="15" height="20">
+        </div>
+        
+    </div>
+    
+    <div id="context">
+        
+        <div id="contextLeft" onclick="contextClickLeft(event)">
+            
+            <div class="contextLeftItem">customize</div>
+            <div class="contextLeftItem">keyboard shortcuts</div>
+            <div class="contextLeftItem">stats</div>
+            <div class="contextLeftItem" style="padding:0">
+                <label for="fileUploadInput" id="contextChooseFile">
+                    <div>choose file(s)</div>
+                </label>
+            </div>
+            <div class="contextLeftItem" onclick="location.reload()">reload page</div>
+            
+        </div>
+        
+        <div id="contextRight">
+            
+            <div class="contextRightItem" style="display:none" onclick="contextClickRight(event)">
+                
+                <div class="contextRightItemSubSelected">color fade</div>
+                <div class="contextRightItemSub">space between bars <img src="images/left2.png" id="leftArrow" width="15" height="20"><img src="images/right2.png" id="rightArrow" width="15" height="20"></div>
+                
+            </div>
+            
+            <div class="contextRightItem" style="display:none">
+                
+                <div class="contextRightItemInner">
+                    
+                    <div class="keyboardKey">SPACE BAR</div>play/pause
+                    <br><br>
+                    <div class="keyboardKey"><img src="images/left.png" width="13" height="10"></div>skip back 5 seconds
+                    <br><br>
+                    <div class="keyboardKey"><img src="images/right.png" width="13" height="10"></div>skip forward 5 seconds
+                    <br><br>
+                    <div class="keyboardKey"><img src="images/up.png" width="10" height="13"></div>volume up
+                    <br><br>
+                    <div class="keyboardKey"><img src="images/down.png" width="10" height="13"></div>volume down
+                    <br><br>
+                    <div class="keyboardKey">HOME</div>skip to the beginning of the song
+                    <br><br>
+                    <div class="keyboardKey">F11</div>fullscreen
+                    <br><br>
+                    <div class="keyboardKey">CTRL+V</div>paste youtube url
+                    
+                </div>
+                
+            </div>
+            
+            <div class="contextRightItem" style="display:none">
+                
+                <div class="statssub"></div>
+                <div class="statssub"></div>
+                <div class="statssub"></div>
+                
+            </div>
+            
+        </div>
+        
+    </div>
+    
+    <canvas width="1280" height="720" id="canvasParticles"></canvas>
+    
+</body>
+
+</html>
+	
+
+	
+	
+	
+	
